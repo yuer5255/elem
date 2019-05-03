@@ -9,20 +9,22 @@
             <header class="shop_detail_header" ref="shopheader" :style="{zIndex: showActivities? '14':'10'}">
                 <img :src="imgBaseUrl + shopDetailData.image_path" class="header_cover_img">
                 <section class="description_header">
-                    <router-link to="/shop/shopDetail" class="description_top">
+                    <!-- <router-link to="/shop/shopDetail" class="description_top"> -->
+                    <a href="javascript:void(0)" class="description_top">
                         <section class="description_left">
                             <img :src="imgBaseUrl + shopDetailData.image_path">
                         </section>
                         <section class="description_right">
                             <h4 class="description_title ellipsis">{{shopDetailData.name}}</h4>
-                            <p class="description_text">商家配送／{{shopDetailData.order_lead_time}}分钟送达／配送费¥{{shopDetailData.float_delivery_fee}}</p>
+                            <!-- <p class="description_text">商家配送／{{shopDetailData.order_lead_time}}分钟送达／配送费¥{{shopDetailData.float_delivery_fee}}</p> -->
                             <p class="description_promotion ellipsis">公告：{{promotionInfo}}</p>
                         </section>
-                        <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" class="description_arrow" >
+                        <!-- <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" class="description_arrow" >
                             <path d="M0 0 L8 7 L0 14"  stroke="#fff" stroke-width="1" fill="none"/>
-                        </svg>
-                    </router-link>
-                    <footer class="description_footer" v-if="shopDetailData.activities.length" @click="showActivitiesFun">
+                        </svg> -->
+                    </a>
+                    <!-- </router-link> -->
+                    <!-- <footer class="description_footer" v-if="shopDetailData.activities.length" @click="showActivitiesFun">
                         <p class="ellipsis">
                             <span class="tip_icon" :style="{backgroundColor: '#' + shopDetailData.activities[0].icon_color, borderColor: '#' + shopDetailData.activities[0].icon_color}">{{shopDetailData.activities[0].icon_name}}</span>
                             <span>{{shopDetailData.activities[0].description}}（APP专享）</span>
@@ -31,7 +33,7 @@
                         <svg class="footer_arrow">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left"></use>
                         </svg>
-                    </footer>
+                    </footer> -->
 
                 </section>
             </header>
@@ -87,16 +89,17 @@
                                     <header class="menu_detail_header">
                                         <section class="menu_detail_header_left">
                                             <strong class="menu_item_title">{{item.name}}</strong>
-                                            <span class="menu_item_description">{{item.description}}</span>
+                                            <!-- <span class="menu_item_description">{{item.description}}</span> -->
                                         </section>
-                                        <span class="menu_detail_header_right" @click="showTitleDetail(index)"></span>
+                                        <!-- <span class="menu_detail_header_right" @click="showTitleDetail(index)"></span> -->
                                         <p class="description_tip" v-if="index == TitleDetailIndex">
                                             <span>{{item.name}}</span>
                                             {{item.description}}
                                         </p>
                                     </header>
                                     <section v-for="(foods,foodindex) in item.foods" :key="foodindex" class="menu_detail_list">
-                                        <router-link  :to="{path: 'shop/foodDetail', query:{image_path:foods.image_path, description: foods.description, month_sales: foods.month_sales, name: foods.name, rating: foods.rating, rating_count: foods.rating_count, satisfy_rate: foods.satisfy_rate, foods, shopId}}" tag="div" class="menu_detail_link">
+                                        <template v-if="foods.specifications.length===0">
+<router-link  :to="{path: 'shop/foodDetail', query:{image_path:foods.image_path, description: foods.description, month_sales: foods.month_sales, name: foods.name, rating: foods.rating, rating_count: foods.rating_count, satisfy_rate: foods.satisfy_rate, foods, shopId}}" tag="div" class="menu_detail_link">
                                             <section class="menu_food_img">
                                                 <img :src="imgBaseUrl + foods.image_path">
                                             </section>
@@ -128,6 +131,8 @@
                                             </section>
                                             <buy-cart :shopId='shopId' :foods='foods' @moveInCart="listenInCart" @showChooseList="showChooseList" @showReduceTip="showReduceTip" @showMoveDot="showMoveDotFun"></buy-cart>
                                         </footer>
+                                        </template>
+                                        
                                     </section>
                                 </li>
                             </ul>
@@ -749,19 +754,22 @@
     }
     .goback{
         position: fixed;
-        top: 0;
+        top: 30px;
         left: 0;
-        width: 100%;
-        height: 2rem;
+        // width: 100%;
+        // height: 2rem;
+        width: 20px;
+        height: 30px;
         z-index: 11;
         padding-top: 0.2rem;
         padding-left: 0.2rem;
     }
     .shop_detail_header{
-        overflow: hidden;
+        // overflow: hidden;
         position: relative;
         .header_cover_img{
             width: 100%;
+            height:100%;
             position: absolute;
             top: 0;
             left: 0;
@@ -946,6 +954,9 @@
         }
         .menu_right{
             flex: 4;
+            // 以下代码移动端可能不需要
+            height: 528px;
+            // 以上代码移动端可能不需要
             overflow-y: auto;
             .menu_detail_header{
                 width: 100%;
@@ -1369,6 +1380,10 @@
         .rating_list_ul{
             background-color: #fff;
             padding: 0 .5rem;
+            // 移动端不需要加
+            overflow: auto;
+            height: 252px;
+            // 以上两行移动端不需要
             .rating_list_li{
                 border-top: 1px solid #f1f1f1;
                 display: flex;

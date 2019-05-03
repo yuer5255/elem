@@ -33,14 +33,14 @@
 							<span class="segmentation">/</span>
 							{{item.piecewise_agent_fee.tips}}
 						</p>
-						<p class="distance_time">
+						<!-- <p class="distance_time">
 							<span v-if="Number(item.distance)">{{item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}}
 								<span class="segmentation">/</span>
 							</span>
 							<span v-else>{{item.distance}}</span>
 							<span class="segmentation">/</span>
 							<span class="order_time">{{item.order_lead_time}}</span>
-						</p>
+						</p> -->
 					</h5>
 				</hgroup>
 			</router-link>

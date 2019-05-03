@@ -28,7 +28,7 @@
                 <p class="deliver_text">送达时间</p>
                 <section class="deliver_time">
                     <p>尽快送达 | 预计 {{checkoutData.delivery_reach_time}}</p>
-                    <p v-if="checkoutData.cart.is_deliver_by_fengniao">蜂鸟专送</p>
+                    <!-- <p v-if="checkoutData.cart.is_deliver_by_fengniao">蜂鸟专送</p> -->
                 </section>
             </section>
             <section class="pay_way container_style">
@@ -41,10 +41,10 @@
                         </svg>
                     </div>
                 </header>
-                <section class="hongbo">
+                <!-- <section class="hongbo">
                     <span>红包</span>
                     <span>暂时只在饿了么 APP 中支持</span>
-                </section>
+                </section> -->
             </section>
             <section class="food_list">
                 <header v-if="checkoutData.cart.restaurant_info">
@@ -81,7 +81,7 @@
                     </div>
                 </div>
             </section>
-            <section class="pay_way container_style">
+            <!-- <section class="pay_way container_style">
                 <router-link :to='{path: "/confirmOrder/remark", query: {id: checkoutData.cart.id, sig: checkoutData.sig}}' class="header_style">
                     <span>订单备注</span>
                     <div class="more_type">
@@ -100,7 +100,7 @@
                         </svg>
                     </span>
                 </router-link>
-            </section>
+            </section> -->
             <section class="confrim_order">
                 <p>待支付 ¥{{checkoutData.cart.total}}</p>
                 <p @click="confrimOrder">确认下单</p>
@@ -127,6 +127,7 @@
         <transition name="router-slid" mode="out-in">
             <router-view></router-view>
         </transition>
+        <alert-tip v-if="showAlert" @closeTip="closeTipFun" :alertText="alertText"></alert-tip>
     </div>
 </template>
 
@@ -150,7 +151,7 @@
                 showPayWay: false,//显示付款方式
                 payWayId: 1, //付款方式
                 showAlert: false, //弹出框
-                alertText: null, //弹出框内容
+                alertText: '当前环境无法支付，请打开官方APP进行付款', //弹出框内容
             }
         },
         created(){
@@ -177,6 +178,7 @@
             headTop,
             alertTip,
             loading,
+            alertTip
         },
         computed: {
             ...mapState([
@@ -258,36 +260,44 @@
             },
             //确认订单
             async confrimOrder(){
+                this.showAlert = true;
                 //用户未登录时弹出提示框
-                if (!(this.userInfo && this.userInfo.user_id)) {
-                    this.showAlert = true;
-                    this.alertText = '请登录';
-                    return
-                    //未选择地址则提示
-                }else if(!this.choosedAddress){
-                    this.showAlert = true;
-                    this.alertText = '请添加一个收货地址';
-                    return
-                }
-                //保存订单
-                this.SAVE_ORDER_PARAM({
-                    user_id: this.userInfo.user_id,
-                    cart_id: this.checkoutData.cart.id,
-                    address_id: this.choosedAddress.id,
-                    description: this.remarklist,
-                    entities: this.checkoutData.cart.groups,
-                    geohash: this.geohash,
-                    sig: this.checkoutData.sig,
-                });
-                //发送订单信息
-                let orderRes = await placeOrders(this.userInfo.user_id, this.checkoutData.cart.id, this.choosedAddress.id, this.remarklist, this.checkoutData.cart.groups, this.geohash, this.checkoutData.sig);
-                //第一次下单的手机号需要进行验证，否则直接下单成功
-                if (orderRes.need_validation) {
-                    this.NEED_VALIDATION(orderRes);
-                    this.$router.push('/confirmOrder/userValidation');
-                }else{
-                    this.ORDER_SUCCESS(orderRes);
-                    this.$router.push('/confirmOrder/payment');
+                // if (!(this.userInfo && this.userInfo.user_id)) {
+                //     this.showAlert = true;
+                //     this.alertText = '请登录';
+                //     return
+                //     //未选择地址则提示
+                // }else if(!this.choosedAddress){
+                //     this.showAlert = true;
+                //     this.alertText = '请添加一个收货地址';
+                //     return
+                // }
+                // //保存订单
+                // this.SAVE_ORDER_PARAM({
+                //     user_id: this.userInfo.user_id,
+                //     cart_id: this.checkoutData.cart.id,
+                //     address_id: this.choosedAddress.id,
+                //     description: this.remarklist,
+                //     entities: this.checkoutData.cart.groups,
+                //     geohash: this.geohash,
+                //     sig: this.checkoutData.sig,
+                // });
+                // //发送订单信息
+                // let orderRes = await placeOrders(this.userInfo.user_id, this.checkoutData.cart.id, this.choosedAddress.id, this.remarklist, this.checkoutData.cart.groups, this.geohash, this.checkoutData.sig);
+                // //第一次下单的手机号需要进行验证，否则直接下单成功
+                // if (orderRes.need_validation) {
+                //     this.NEED_VALIDATION(orderRes);
+                //     this.$router.push('/confirmOrder/userValidation');
+                // }else{
+                //     this.ORDER_SUCCESS(orderRes);
+                //     this.$router.push('/confirmOrder/payment');
+                // }
+            },
+            //关闭提示框，跳转到订单列表页
+            closeTipFun(){
+                this.showAlert = false;
+                if (this.gotoOrders) {
+                    this.$router.push('/order');
                 }
             },
         },
@@ -465,7 +475,7 @@
                 @include sc(.65rem, #666);
             }
             .food_name{
-                width: 11rem;
+                width: 10rem;
             }
             .num_price{
                 flex: 1;
