@@ -20,7 +20,7 @@
                         </svg>
                     </router-link>
                     <ul class="food_list_ul">
-                        <li v-for="item in orderDetail.basket.group[0]">
+                        <li v-for="(item,index) in orderDetail.basket.group[0]" :key="index">
                             <p class="food_name ellipsis">{{item.name}}</p>
                             <div class="quantity_price">
                                 <span>X{{item.quantity}}</span>
@@ -53,7 +53,7 @@
                     <section class="item_style">
                         <p class="item_left">配送方式：</p>
                         <div class="item_right">
-                            <p>蜂鸟专送</p>
+                            <p>平台专送</p>
                         </div>
                     </section>
                 </section>

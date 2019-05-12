@@ -65,7 +65,7 @@ export default {
 		let category = shop[category_id] = (shop[category_id] || {});
 		let item = category[item_id] = (category[item_id] || {});
 		if (item[food_id]) {
-			item[food_id]['num']++;
+			item[food_id]['num'] += 1;
 		} else {
 			item[food_id] = {
 					"num" : 1,
@@ -173,6 +173,7 @@ export default {
 	//确认订单页添加新的的地址
 	[CONFIRM_ADDRESS](state, newAddress) {
 		state.newAddress.push(newAddress);
+		console.log(newAddress);
 	},
 	//选择的地址
 	[CHOOSE_ADDRESS](state, {

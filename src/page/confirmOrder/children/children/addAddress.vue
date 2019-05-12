@@ -99,6 +99,7 @@
             },
             //保存地址信息
             async addAddress(){
+                console.log(this);
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     this.showAlert = true;
                     this.alertText = '请登录'
@@ -121,9 +122,16 @@
                     this.tag_type = 3;
                 }else if(this.tag == '公司'){
                     this.tag_type = 4;
+                } else {
+                    console.log('else');
+                    this.tag = '无';
+                    this.tag_type = 1;
                 }
-                let res = await postAddAddress(this.userInfo.user_id, this.searchAddress.name, this.address_detail, this.geohash, this.name, this.phone, this.anntherPhoneNumber, 0, this.sex, this.tag, this.tag_type);
-                //保存成功返沪上一页，否则弹出提示框
+                let res = await 
+                postAddAddress(this.userInfo.user_id, this.searchAddress.name, 
+                this.address_detail, this.geohash, this.name, 
+                this.phone, this.anntherPhoneNumber, 0, this.sex, this.tag, this.tag_type);
+                //保存成功返回上一页，否则弹出提示框
                 if (res.message) {
                     this.showAlert = true;
                     this.alertText = res.message;

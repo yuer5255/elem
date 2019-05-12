@@ -12,14 +12,14 @@
                     </span>
                     <div class="user-info">
                         <p>{{username}}</p>
-                        <p>
+                        <!-- <p>
                             <span class="user-icon">
                                 <svg class="icon-mobile" fill="#fff">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mobile"></use>
                                 </svg>
                             </span>
                             <span class="icon-mobile-number">{{mobile}}</span>
-                        </p>
+                        </p> -->
                     </div>
                     <span class="arrow">
                         <svg class="arrow-svg" fill="#fff">

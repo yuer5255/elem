@@ -229,9 +229,9 @@
                                     </p>
                                 </section>
                             </header>
-                            <ul class="tag_list_ul">
+                            <!-- <ul class="tag_list_ul">
                                 <li v-for="(item, index) in ratingTagsList" :key="index" :class="{unsatisfied: item.unsatisfied, tagActivity: ratingTageIndex == index}" @click="changeTgeIndex(index, item.name)">{{item.name}}({{item.count}})</li>
-                            </ul>
+                            </ul> -->
                             <ul class="rating_list_ul">
                                 <li v-for="(item, index) in ratingList" :key="index" class="rating_list_li">
                                     <img :src="getImgPath(item.avatar)" class="user_avatar">
@@ -1318,7 +1318,7 @@
             display: flex;
             background-color: #fff;
             padding: .8rem .5rem;
-            margin-bottom: 0.5rem;
+            // margin-bottom: 0.5rem;
             .rating_header_left{
                 flex: 3;
                 text-align: center;
@@ -1381,8 +1381,8 @@
             background-color: #fff;
             padding: 0 .5rem;
             // 移动端不需要加
-            overflow: auto;
-            height: 252px;
+            // overflow: auto;
+            // height: 252px;
             // 以上两行移动端不需要
             .rating_list_li{
                 border-top: 1px solid #f1f1f1;
