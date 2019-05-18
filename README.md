@@ -2,7 +2,6 @@
 
 原项目详情请移步https://github.com/bailicangdu/vue2-elm
 
-
 ## 技术栈
 
 vue2 + vuex + vue-router + webpack + ES6/7 + fetch + sass + flex + svg
