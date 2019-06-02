@@ -21,7 +21,8 @@ if (process.env.NODE_ENV == 'development') {
 }else if(process.env.NODE_ENV == 'production'){
 	// baseUrl = '//elm.cangdu.org';
 	baseUrl = 'https://zhuud.com/api';
-    imgBaseUrl = '//elm.cangdu.org/img/';
+	// imgBaseUrl = '//elm.cangdu.org/img/';
+	imgBaseUrl = '';
 }
 
 export {
