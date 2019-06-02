@@ -21,14 +21,14 @@
                             </p>
                         </header>
                         <section class="order_basket">
-                            <p class="order_name ellipsis">{{item.basket.group[0][0].name}}{{item.basket.group[0].length > 1 ? ' 等' + item.basket.group[0].length + '件商品' : ''}}</p>
+                            <p class="order_name ellipsis">{{item.basket.group[0].name}}{{item.basket.group.length > 1 ? ' 等' + item.basket.group.length + '件商品' : ''}}</p>
                             <p class="order_amount">¥{{item.total_amount.toFixed(2)}}</p>
                         </section>
                     </section>
-                    <div class="order_again">
+                    <!-- <div class="order_again">
                         <compute-time v-if="item.status_bar.title == '等待支付'" :time="item.time_pass"></compute-time>
                         <router-link :to="{path: '/shop', query: {geohash, id: item.restaurant_id}}" tag="span" class="buy_again" v-else>再来一单</router-link>
-                    </div>
+                    </div> -->
                 </section>
             </li>
         </ul>

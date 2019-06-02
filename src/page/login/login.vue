@@ -26,7 +26,7 @@
                     <span>...</span>
                 </div>
             </section>
-            <section class="input_container captcha_code_container">
+            <!-- <section class="input_container captcha_code_container">
                 <input type="text" placeholder="验证码" maxlength="4" v-model="codeNumber">
                 <div class="img_change_img">
                     <img v-show="captchaCodeImg" :src="captchaCodeImg">
@@ -35,7 +35,7 @@
                         <p>换一张</p>
                     </div>
                 </div>
-            </section>
+            </section> -->
         </form>
         <p class="login_tips">
             温馨提示：未注册过的账号，登录时将自动注册
@@ -158,11 +158,12 @@
                         this.showAlert = true;
                         this.alertText = '请输入密码';
                         return
-                    }else if(!this.codeNumber){
-                        this.showAlert = true;
-                        this.alertText = '请输入验证码';
-                        return
                     }
+                    // else if(!this.codeNumber){
+                    //     this.showAlert = true;
+                    //     this.alertText = '请输入验证码';
+                    //     return
+                    // }
                     //用户名登录
                     this.userInfo = await accountLogin(this.userAccount, this.passWord, this.codeNumber);
                 }

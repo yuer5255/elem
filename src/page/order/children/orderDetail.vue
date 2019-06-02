@@ -7,10 +7,11 @@
                     <img :src="imgBaseUrl + orderDetail.restaurant_image_url">
                     <p>{{orderDetail.status_bar.title}}</p>
                     <p>{{orderDetail.timeline_node.description}}</p>
-                    <router-link class="order_again" :to="{path: '/shop', query: {geohash, id: orderDetail.restaurant_id}}">再来一单</router-link>
+                    <!-- <router-link class="order_again" :to="{path: '/shop', query: {geohash, id: orderDetail.restaurant_id}}">再来一单</router-link> -->
                 </section>
                 <section class="food_list">
-                    <router-link class="food_list_header" :to="{path: '/shop', query: {geohash, id: orderDetail.restaurant_id}}">
+                    <!-- <router-link class="food_list_header" :to="{path: '/shop', query: {geohash, id: orderDetail.restaurant_id}}"> -->
+                    <a class="food_list_header" href="javascript:void(0)">
                         <div class="shop_name">
                             <img :src="imgBaseUrl + orderDetail.restaurant_image_url">
                             <span>{{orderDetail.restaurant_name}}</span>
@@ -18,9 +19,10 @@
                         <svg fill="#333" class="arrow_right">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                         </svg>
-                    </router-link>
+                    </a>    
+                    <!-- </a> -->
                     <ul class="food_list_ul">
-                        <li v-for="(item,index) in orderDetail.basket.group[0]" :key="index">
+                        <li v-for="(item,index) in orderDetail.basket.group" :key="index">
                             <p class="food_name ellipsis">{{item.name}}</p>
                             <div class="quantity_price">
                                 <span>X{{item.quantity}}</span>

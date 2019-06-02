@@ -52,7 +52,7 @@
                     <span>{{checkoutData.cart.restaurant_info.name}}</span>
                 </header>
                 <ul class="food_list_ul" v-if="checkoutData.cart.groups">
-                    <li v-for="item in checkoutData.cart.groups[0]" :key="item.id" class="food_item_style">
+                    <li v-for="item in checkoutData.cart.groups" :key="item.id" class="food_item_style">
                         <p class="food_name ellipsis">{{item.name}}</p>
                         <div class="num_price">
                             <span>x {{item.quantity}}</span>
@@ -60,13 +60,13 @@
                         </div>
                     </li>
                 </ul>
-                <div class="food_item_style" v-if="checkoutData.cart.extra">
+                <!-- <div class="food_item_style" v-if="checkoutData.cart.extra">
                     <p class="food_name ellipsis">{{checkoutData.cart.extra[0].name}}</p>
                     <div class="num_price">
                         <span></span>
                         <span>¥ {{checkoutData.cart.extra[0].price}}</span>
                     </div>
-                </div>
+                </div> -->
                 <div class="food_item_style">
                     <p class="food_name ellipsis">配送费</p>
                     <div class="num_price">

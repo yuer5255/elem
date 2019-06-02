@@ -241,7 +241,7 @@
                                                 <p class="username">{{item.username}}</p>
                                                 <p class="star_desc">
                                                     <rating-star :rating='item.rating_star'></rating-star>
-                                                    <span class="time_spent_desc">{{item.time_spent_desc}}</span>
+                                                    <span class="time_spent_desc">{{item.rating_text}}</span>
                                                 </p>
                                             </section>
                                             <time class="rated_at">{{item.rated_at}}</time>
@@ -440,6 +440,7 @@
                 this.shopDetailData = await shopDetails(this.shopId, this.latitude, this.longitude);
                 //获取商铺食品列表
                 this.menuList = await foodMenu(this.shopId);
+                console.log(this.menuList);
                 //评论列表
                 this.ratingList = await getRatingList(this.shopId, this.ratingOffset);
                 //商铺评论详情
