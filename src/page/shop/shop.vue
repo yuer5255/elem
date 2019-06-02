@@ -203,7 +203,8 @@
             </transition>
             <transition name="fade-choose">
                 <section class="rating_container" id="ratingContainer" v-show="changeShowType =='rating'">
-                    <section v-load-more="loaderMoreRating" type="2">
+                    <!-- v-load-more="loaderMoreRating" -->
+                    <section  type="2">
                         <section>
 
                             <header class="rating_header">
@@ -697,7 +698,7 @@
                         });
                         this.ratingScroll.on('scroll', (pos) => {
                             if (Math.abs(Math.round(pos.y)) >=  Math.abs(Math.round(this.ratingScroll.maxScrollY))) {
-                                this.loaderMoreRating();
+                                // this.loaderMoreRating();
                                 this.ratingScroll.refresh();
                             }
                         })

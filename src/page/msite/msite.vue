@@ -71,7 +71,7 @@ export default {
 		this.SAVE_GEOHASH(this.geohash);
     	//获取位置信息
     	let res = await msiteAddress(this.geohash);
-    	this.msiteTitle = res.name;
+		this.msiteTitle = res.name;
     	// 记录当前经度纬度
     	this.RECORD_ADDRESS(res);
 

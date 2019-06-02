@@ -151,7 +151,7 @@
                 showPayWay: false,//显示付款方式
                 payWayId: 1, //付款方式
                 showAlert: false, //弹出框
-                alertText: '当前环境无法支付，请打开官方APP进行付款', //弹出框内容
+                alertText: '', //弹出框内容
             }
         },
         created(){

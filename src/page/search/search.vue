@@ -2,7 +2,7 @@
   	<div class="paddingTop search_page">
         <head-top head-title="搜索" goBack="true"></head-top>
         <form class="search_form">
-            <input type="search" name="search" placeholder="请输入商家或美食名称" class="search_input" v-model="searchValue" @input="checkInput">
+            <input type="search" name="search" placeholder="请输入商家" class="search_input" v-model="searchValue" @input="checkInput">
             <input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')">
         </form>
         <section v-if="restaurantList.length">
