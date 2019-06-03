@@ -25,7 +25,10 @@
         props: ['alertText'],
         methods: {
             closeTip(){
-                this.$emit('closeTip')
+                this.$emit('closeTip');
+                if (this.alertText === '密码修改成功') {
+                    this.$emit('logout');
+                }
             }
         }
     }

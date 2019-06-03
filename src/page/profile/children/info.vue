@@ -3,7 +3,7 @@
         <head-top head-title="账户信息" go-back='true'></head-top>
         <section class="profile-info">
             <section class="headportrait">
-                <input type="file" class="profileinfopanel-upload" @change="uploadAvatar">
+                <!-- <input type="file" class="profileinfopanel-upload" @change="uploadAvatar"> -->
                 <h2>头像</h2>
                 <div class="headportrait-div">
                     <img  v-if="userInfo" :src="imgBaseUrl + userInfo.avatar" class="headportrait-div-top">
@@ -12,11 +12,11 @@
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#avatar-default"></use>
                         </svg>
                     </span>
-                    <span class="headportrait-div-bottom">
+                    <!-- <span class="headportrait-div-bottom">
                         <svg fill="#d8d8d8">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                         </svg>
-                    </span>
+                    </span> -->
                 </div>
             </section>
             <!-- <router-link to="/profile/info/setusername" class="info-router">

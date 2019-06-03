@@ -8,7 +8,7 @@
         <section v-if="restaurantList.length">
             <h4 class="title_restaurant">商家</h4>
             <ul class="list_container">
-                <router-link :to="{path:'/shop', query:{id:item.id}}" tag="li" v-for="item in restaurantList" :key="item.id" class="list_li">
+                <router-link :to="{path:'/shop', query:{geohash, id: item.id}}" tag="li" v-for="item in restaurantList" :key="item.id" class="list_li">
                     <section class="item_left">
                         <img :src="imgBaseUrl + item.image_path" class="restaurant_img">
                     </section>
@@ -78,6 +78,8 @@ export default {
     },
     mounted(){
         this.geohash = this.$route.params.geohash;
+        console.log(this.$route.params);
+        console.log(this.geohash);
         //获取搜索历史记录
         if (getStore('searchHistory')) {
             this.searchHistory = JSON.parse(getStore('searchHistory'));

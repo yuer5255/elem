@@ -9,9 +9,6 @@
                 <button @click.prevent="getVerifyCode" :class="{right_phone_number:rightPhoneNumber}" v-show="!computedTime">获取验证码</button>
                 <button  @click.prevent v-show="computedTime">已发送({{computedTime}}s)</button>
             </section>
-            <section class="input_container">
-                <input type="text" placeholder="验证码" name="mobileCode" maxlength="6" v-model="mobileCode">
-            </section>
         </form>
         <form class="loginForm" v-else>
             <section class="input_container">
@@ -26,16 +23,6 @@
                     <span>...</span>
                 </div>
             </section>
-            <!-- <section class="input_container captcha_code_container">
-                <input type="text" placeholder="验证码" maxlength="4" v-model="codeNumber">
-                <div class="img_change_img">
-                    <img v-show="captchaCodeImg" :src="captchaCodeImg">
-                    <div class="change_img" @click="getCaptchaCode">
-                        <p>看不清</p>
-                        <p>换一张</p>
-                    </div>
-                </div>
-            </section> -->
         </form>
         <p class="login_tips">
             温馨提示：未注册过的账号，登录时将自动注册
@@ -103,37 +90,6 @@
             async getCaptchaCode(){
                 let res = await getcaptchas();
                 this.captchaCodeImg = res.code;
-            },
-            //获取短信验证码
-            async getVerifyCode(){
-                if (this.rightPhoneNumber) {
-                    this.computedTime = 30;
-                    this.timer = setInterval(() => {
-                        this.computedTime --;
-                        if (this.computedTime == 0) {
-                            clearInterval(this.timer)
-                        }
-                    }, 1000)
-                    //判读用户是否存在
-                    let exsis = await checkExsis(this.phoneNumber, 'mobile');
-                    if (exsis.message) {
-                        this.showAlert = true;
-                        this.alertText = exsis.message;
-                        return
-                    }else if(!exsis.is_exists) {
-                        this.showAlert = true;
-                        this.alertText = '您输入的手机号尚未绑定';
-                        return
-                    }
-                    //发送短信验证码
-                    let res = await mobileCode(this.phoneNumber);
-                    if (res.message) {
-                        this.showAlert = true;
-                        this.alertText = res.message;
-                        return
-                    }
-                    this.validate_token = res.validate_token;
-                }
             },
             //发送登录信息
             async mobileLogin(){

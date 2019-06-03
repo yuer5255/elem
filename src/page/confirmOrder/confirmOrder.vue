@@ -260,7 +260,7 @@
             },
             //确认订单
             async confrimOrder(){
-                this.showAlert = true;
+                this.showAlert = false;
                 //用户未登录时弹出提示框
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     this.showAlert = true;
@@ -290,7 +290,9 @@
                     this.$router.push('/confirmOrder/userValidation');
                 }else{
                     this.ORDER_SUCCESS(orderRes);
-                    this.$router.push('/confirmOrder/payment');
+                    this.showAlert = false;
+                    // this.$router.push('/confirmOrder/payment');
+                    this.$router.push('/order');
                 }
             },
             //关闭提示框，跳转到订单列表页

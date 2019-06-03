@@ -4,38 +4,29 @@
         <form class="restForm">
             <section class="input_container phone_number">
                 <input type="text" placeholder="账号" name="phone" maxlength="11" v-model="phoneNumber" @input="inputPhone">
-                <!-- <button @click.prevent="getVerifyCode" :class="{right_phone_number:rightPhoneNumber}" v-show="!computedTime">获取验证码</button>
-                <button  @click.prevent v-show="computedTime">已发送({{computedTime}}s)</button> -->
             </section>
              <section class="input_container">
-                <input type="text" placeholder="旧密码" name="oldPassWord" v-model="oldPassWord">
+                <input type="password" placeholder="旧密码" name="oldPassWord" v-model="oldPassWord">
             </section>
             <section class="input_container">
-                <input type="text" placeholder="请输入新密码" name="newPassWord" v-model="newPassWord">
+                <input type="password" placeholder="请输入新密码" name="newPassWord" v-model="newPassWord">
             </section>
             <section class="input_container">
-                <input type="text" placeholder="请确认密码" name="confirmPassWord" v-model="confirmPassWord">
-            </section>
-            <section class="input_container captcha_code_container">
-                <input type="text" placeholder="验证码" name="mobileCode" maxlength="6" v-model="mobileCode">
-                <div class="img_change_img">
-                    <img v-show="captchaCodeImg" :src="captchaCodeImg">
-                    <div class="change_img" @click="getCaptchaCode">
-                        <p>看不清</p>
-                        <p>换一张</p>
-                    </div>
-                </div>
+                <input type="password" placeholder="请确认密码" name="confirmPassWord" v-model="confirmPassWord">
             </section>
         </form>
         <div class="login_container" @click="resetButton">确认修改</div>
-        <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
+        <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText" @logout="outLogin"></alert-tip>
     </div>
 </template>
 
 <script>
+    import {mapMutations} from 'vuex'
     import headTop from 'src/components/header/head'
     import alertTip from 'src/components/common/alertTip'
     import {mobileCode, checkExsis, sendMobile, getcaptchas, changePassword} from 'src/service/getData'
+    import {removeStore} from 'src/config/mUtils'
+    import {signout} from 'src/service/getData'
 
     export default {
         data(){
@@ -62,6 +53,9 @@
             this.getCaptchaCode()
         },
         methods: {
+            ...mapMutations([
+                'OUT_LOGIN'
+            ]),
             //判断输入的电话号码
             inputPhone(){
                 if(/.+/gi.test(this.phoneNumber)){
@@ -129,9 +123,9 @@
                     this.showAlert = true;
                     this.alertText = '两次输入的密码不一致';
                     return
-                }else if(!this.mobileCode){
+                }else if (this.newPassWord === this.oldPassWord) {
                     this.showAlert = true;
-                    this.alertText = '请输验证码';
+                    this.alertText = '新密码和旧密码不可相同';
                     return
                 }
                 // 发送重置信息
@@ -148,7 +142,14 @@
             },
             closeTip(){
                 this.showAlert = false;
-            }   
+            },
+            //退出登录
+            async outLogin(){
+                this.OUT_LOGIN();
+                this.$router.push('/profile');
+                removeStore('user_id');
+                await signout();
+            } 
         }
     }
 
