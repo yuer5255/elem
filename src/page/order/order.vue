@@ -1,8 +1,8 @@
  <template>
     <div class="order_page">
         <head-top head-title="订单列表" go-back='true'></head-top>
-        <ul class="order_list_ul" v-load-more="loaderMore">
-            <li class="order_list_li" v-for="item in orderList" :key="item.id">
+        <ul class="order_list_ul">
+            <li class="order_list_li" v-for="(item,index) in orderList" :key="item.id + '_' + index">
                 <img :src="imgBaseUrl + item.restaurant_image_url" class="restaurant_image">
                 <section class="order_item_right">
                     <section @click="showDetail(item)">

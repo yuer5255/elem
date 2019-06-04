@@ -63,7 +63,7 @@
     			standbytele:'', //备用手机号提示 
     			standbytelenum:'', //备用手机号
     			addSearch:false, //添加搜索地址
-    			newAddress:{},			//增加数组的元素
+    			// newAddress:{},			//增加数组的元素
                 showAlert: false, //弹出框
                 alertText: null, //弹出信息
             }
@@ -143,10 +143,11 @@
                 }else if(this.butpart){
                     //保存的地址存入vuex
             		this.ADD_ADDRESS({
+						id: res.addressId,
                         name: this.message,
                         address: this.mesthree,
                         address_detail: this.addAddress,
-                        geohash: 'wtw37r7cxep4',
+                        geohash: '',
                         phone: this.telenum,
                         phone_bk: this.standbytelenum,
                         poi: this.addAddress,

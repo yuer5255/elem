@@ -22,7 +22,7 @@
                     </a>    
                     <!-- </a> -->
                     <ul class="food_list_ul">
-                        <li v-for="(item,index) in orderDetail.basket.group" :key="index">
+                        <li v-for="(item,index) in orderDetail.basket.group" :key="item.id + '_' + index">
                             <p class="food_name ellipsis">{{item.name}}</p>
                             <div class="quantity_price">
                                 <span>X{{item.quantity}}</span>

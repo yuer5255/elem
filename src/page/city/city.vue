@@ -27,7 +27,7 @@
     import headTop from 'src/components/header/head'
     import {currentcity, searchplace} from 'src/service/getData'
     import {getStore, setStore, removeStore} from 'src/config/mUtils'
-
+    import {mapMutations} from 'vuex'
     export default {
     	data(){
             return{
@@ -59,6 +59,9 @@
         },
 
         methods:{
+            ...mapMutations([
+               'SAVE_GEOHASH'
+            ]),
             initData(){
                 //获取搜索历史记录
                 if (getStore('placeHistory')) {
@@ -99,7 +102,9 @@
                 }else {
                     this.placeHistory.push(choosePlace)
                 }
-                setStore('placeHistory',this.placeHistory)
+                //保存geohash 到vuex
+		        this.SAVE_GEOHASH(geohash);
+                setStore('placeHistory',this.placeHistory);
                 this.$router.push({path:'/msite', query:{geohash}})
             },
             clearAll(){

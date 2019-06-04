@@ -102,19 +102,28 @@
                 console.log(this);
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     this.showAlert = true;
-                    this.alertText = '请登录'
-                }else if(!this.name){
+                    this.alertText = '请登录';
+                    return;
+                }
+                if(!this.name){
                     this.showAlert = true;
-                    this.alertText = '请输入姓名'
-                }else if(!this.phone){
+                    this.alertText = '请输入姓名';
+                    return;
+                }
+                if(!(/^1[34578]\d{9}$/.test(this.phone))){
                     this.showAlert = true;
-                    this.alertText = '请输入电话号码'
-                }else if(!this.searchAddress){
+                    this.alertText = '请输入正确电话号码';
+                    return;
+                }
+                if(!this.searchAddress){
                     this.showAlert = true;
-                    this.alertText = '请选择地址'
-                }else if(!this.address_detail){
+                    this.alertText = '请选择地址';
+                    return;
+                }
+                if(!this.address_detail){
                     this.showAlert = true;
-                    this.alertText = '请输入详细地址'
+                    this.alertText = '请输入详细地址';
+                    return;
                 }
                 if (this.tag == '家') {
                     this.tag_type = 2;
@@ -123,12 +132,10 @@
                 }else if(this.tag == '公司'){
                     this.tag_type = 4;
                 } else {
-                    console.log('else');
                     this.tag = '无';
                     this.tag_type = 1;
                 }
-                let res = await 
-                postAddAddress(this.userInfo.user_id, this.searchAddress.name, 
+                let res = await postAddAddress(this.userInfo.user_id, this.searchAddress.name, 
                 this.address_detail, this.geohash, this.name, 
                 this.phone, this.anntherPhoneNumber, 0, this.sex, this.tag, this.tag_type);
                 //保存成功返回上一页，否则弹出提示框
